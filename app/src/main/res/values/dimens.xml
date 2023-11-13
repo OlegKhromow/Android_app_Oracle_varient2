@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_width">200dp</dimen>
+    <dimen name="default_margin">18dp</dimen>
+    <dimen name="enter_text_height">48dp</dimen>
+    <dimen name="question_entry_width">250dp</dimen>
+    <dimen name="answer_text_size">24sp</dimen>
+    <dimen name="enter_question_height">80dp</dimen>
+    <dimen name="image_landscape_size">120dp</dimen>
+</resources>

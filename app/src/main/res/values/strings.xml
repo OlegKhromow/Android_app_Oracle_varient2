@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Oracle</string>
+    <string name="ask_a_question">Go to oracle</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
+    <string name="name_enter">Name:</string>
+    <string name="surname_enter">Surname:</string>
+    <string name="hintName">Will</string>
+    <string name="hint_surname">Smith</string>
+    <string name="birth_date_enter">Birth date:</string>
+    <string name="sex_enter">Sex:</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="save">Save</string>
+    <string name="defaultBirthDate">Choose your birthday</string>
+    <string name="menu">Go to menu</string>
+    <string name="ask">Ask a question</string>
+    <string name="enter_question">Enter your question here</string>
+    <string name="alert_dialog_title">Alert!</string>
+    <string name="alert_dialog_message">Hey buddy, you didn\'t enter information about you.\nDo you want to do it now?</string>
+    <string name="alert_dialog_yes">Yes</string>
+    <string name="alert_dialog_no">No</string>
+    <string name="enter_question_error">No question was entered!</string>
+    <string name="enter_name_error">No name was entered</string>
+    <string name="enter_surname_error">No surname was entered</string>
+    <string name="choose_sex_error">Sex is not chosen</string>
+    <string name="question_recommendation">The question must have a yes or no answer</string>
+    <string-array name="answers_array">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Possible</item>
+        <item>Quite likely</item>
+        <item>Unlikely</item>
+        <item>Don\'t know</item>
+    </string-array>
+</resources>

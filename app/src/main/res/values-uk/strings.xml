@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Оракул</string>
+    <string name="ask_a_question">Запитати оракула</string>
+    <string name="settings">Налаштування</string>
+    <string name="exit">Вихід</string>
+    <string name="name_enter">Ім\'я:</string>
+    <string name="surname_enter">Прізвище:</string>
+    <string name="hintName">Тарас</string>
+    <string name="hint_surname">Шевченко</string>
+    <string name="birth_date_enter">Дата народження:</string>
+    <string name="sex_enter">Стать:</string>
+    <string name="male">чоловік</string>
+    <string name="female">жінка</string>
+    <string name="save">Зберегти</string>
+    <string name="defaultBirthDate">Виберіть дату</string>
+    <string name="menu">Меню</string>
+    <string name="ask">Запитати</string>
+    <string name="enter_question">Напишіть ваше запитання тут</string>
+    <string name="alert_dialog_title">Увага!</string>
+    <string name="alert_dialog_message">Гей друже, ти не заповнив інформацію про себе.\\nХочеш зробити це зараз?</string>
+    <string name="alert_dialog_yes">Так</string>
+    <string name="alert_dialog_no">Ні</string>
+    <string name="enter_question_error">Ви не ввели запитання!</string>
+    <string name="enter_name_error">Ви не ввели ім\'я!</string>
+    <string name="enter_surname_error">Ви не ввели прізвище!</string>
+    <string name="choose_sex_error">Стать не вибрана!</string>
+    <string name="question_recommendation">Запитання має бути із відповідю так або ні</string>
+    <string-array name="answers_array">
+        <item>Так</item>
+        <item>Ні</item>
+        <item>Можливо</item>
+        <item>Цілком вірогідно</item>
+        <item>Малоймовірно</item>
+        <item>Не знаю</item>
+    </string-array>
+</resources>
