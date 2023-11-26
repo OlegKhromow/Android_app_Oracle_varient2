@@ -7,4 +7,5 @@
     <dimen name="answer_text_size">24sp</dimen>
     <dimen name="enter_question_height">80dp</dimen>
     <dimen name="image_landscape_size">120dp</dimen>
+    <dimen name="progressbar_size">40dp</dimen>
 </resources>

@@ -1,24 +1,23 @@
 package stu.cn.ua.lab2.fragments;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import stu.cn.ua.lab2.MyService;
 import stu.cn.ua.lab2.R;
+import stu.cn.ua.lab2.RetainFragment;
 import stu.cn.ua.lab2.databinding.FragmentQuestionBinding;
 import stu.cn.ua.lab2.module.UserInfo;
+import stu.cn.ua.lab2.tasks.ViewState;
 
 
 /**
@@ -26,11 +25,9 @@ import stu.cn.ua.lab2.module.UserInfo;
  * Use the {@link QuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestionFragment extends BaseFragment {
-    private final String KEY_ANSWER = "ANSWER";
+public class QuestionFragment extends BaseFragment implements RetainFragment.StateListener{
     private FragmentQuestionBinding binding;
-
-    private MyService service;
+    private RetainFragment retainFragment;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -56,23 +53,32 @@ public class QuestionFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         binding = FragmentQuestionBinding.inflate(inflater, container, false);
 
+        retainFragment = (RetainFragment) getParentFragmentManager().findFragmentByTag(RetainFragment.TAG);
+        if (retainFragment == null){
+            retainFragment = new RetainFragment();
+            getParentFragmentManager().beginTransaction()
+                    .add(retainFragment, RetainFragment.TAG)
+                    .commit();
+        }
+        retainFragment.setListener(this);
+
         if (getArguments() != null) {
             userInfo = getArguments().getParcelable(USER_SETTINGS, UserInfo.class);
         }
-        if (savedInstanceState != null)
-            binding.answerTextView.setText(savedInstanceState.getCharSequence(KEY_ANSWER));
 
         binding.askButton.setOnClickListener(v -> {
             getAnswer();
         });
         binding.toMenuButton.setOnClickListener(v -> {
             openFragment(MenuFragment.newInstance(userInfo));
+            retainFragment.startState();
         });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 openFragment(MenuFragment.newInstance(userInfo));
+                retainFragment.startState();
             }
         });
         return binding.getRoot();
@@ -89,38 +95,20 @@ public class QuestionFragment extends BaseFragment {
             binding.editQuestion.setText("");
         }
         else {
-            binding.answerTextView.setText(service.generateAnswer(question, userInfo));
+            retainFragment.generateAnswer(question, userInfo);
         }
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putCharSequence(KEY_ANSWER, binding.answerTextView.getText());
+    public void onDestroyView() {
+        super.onDestroyView();
+        retainFragment.setListener(null);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Intent intent = new Intent(getActivity(), MyService.class);
-        getActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+    public void onNewState(ViewState viewState) {
+        binding.askButton.setEnabled(viewState.isButtonEnabled);
+        binding.answerTextView.setText(viewState.result);
+        binding.progressBar.setVisibility(viewState.showProgress ? View.VISIBLE : View.GONE);
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        getActivity().unbindService(connection);
-    }
-
-    private final ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
-            service = ((MyService.MyBinder)binder).getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            service = null;
-        }
-    };
 }
